@@ -22,6 +22,7 @@ function onInit() {
     setMinesNegsCount(gBoard)
     renderBoard(gBoard)
     console.table(gBoard)
+    console.log(gBoard)
 }
 
 
@@ -31,7 +32,7 @@ function builtBoard() {
         for (var j = 0; j < board[0].length; j++) {
             board[i][j] = {
                 minesAroundCount: 4,
-                isShown: true,
+                isShown: false,
                 isMine: false,
                 isMarked: true
             }
@@ -46,8 +47,19 @@ function builtBoard() {
 
 function cellClicked(elCell, i, j) {
     const cell = gBoard[i][j]
+    cell.isShown = true
+    console.log('cell:', cell)
     console.log('Cell clicked:', elCell, i, j)
+    if (cell.minesAroundCount > 0 && !cell.isMine) {
+        elCell.innerHTML = cell.minesAroundCount
+
+    } else if (cell.isMine)
+        elCell.innerHTML = MINE
+
 }
+
+
+
 
 function countMinesAround(board, rowIdx, colIdx) {
     var MineCount = 0
@@ -97,8 +109,13 @@ function renderBoard(board) {
 
             if (currCell.isMine) cellClass += ' bomb'
             strHTML += '<td class="cell ' + cellClass + '" onclick="cellClicked(this,' + i + ',' + j + ')" >'
-            if (currCell.isMine)
-                strHTML += MINE
+            if (currCell.isShown) {
+                if (currCell.isShown && currCell.isMine)
+                    strHTML += MINE
+                else {
+                    strHTML += currCell.minesAroundCount
+                }
+            }
 
         }
         '</td>'
