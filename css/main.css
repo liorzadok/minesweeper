@@ -1,5 +1,34 @@
+.table {
+    align-items: center;
+}
+
 .board td {
     width: 30px;
     height: 30px;
+    text-align: center;
+    background-color: rgb(232, 232, 232);
+}
+
+
+.timer {
+    height: 100px;
+}
+
+
+.marked {
+
+    background-color: lightpink;
+}
+
+.table {
+    height: 400px;
+    width: 400px;
+}
+
+.board .cell-chosen {
+    background-color: blueviolet;
+}
+
+.h1 {
     text-align: center;
 }
